@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Ordering System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .menu-item, #cart {
+            margin: 10px 0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        button {
+            padding: 10px 15px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #cart {
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Menu</h1>
+        <div class="menu-item">
+            <p>Pizza - $10.00</p>
+            <button onclick="addToCart('Pizza', 10.00)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+            <p>Burger - $8.00</p>
+            <button onclick="addToCart('Burger', 8.00)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+            <p>Pasta - $12.00</p>
+            <button onclick="addToCart('Pasta', 12.00)">Add to Cart</button>
+        </div>
+
+        <h1>Cart</h1>
+        <div id="cart"></div>
+        <p>Total: $<span id="total">0.00</span></p>
+    </div>
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            total += price;
+            displayCart();
+        }
+
+        function displayCart() {
+            const cartDiv = document.getElementById('cart');
+            cartDiv.innerHTML = '';
+            cart.forEach(cartItem => {
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.textContent = `${cartItem.item} - $${cartItem.price.toFixed(2)}`;
+                cartDiv.appendChild(cartItemDiv);
+            });
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+    </script>
+</body>
+</html>
